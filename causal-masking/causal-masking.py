@@ -8,14 +8,11 @@ def apply_causal_mask(scores, mask_value=-1e9):
     """
     # Write code here
     scores_mask = scores.copy()
-    # for i in range(len(scores)):
-    #     for j in range(i+1,len(scores[0])):
-    #         scores_mask[i][j] = mask_value
-    # return scores_mask
     dim = len(scores.shape)
     if dim == 2:
-        for i in range(len(scores)):
-            for j in range(i+1,len(scores[0])):
+        m,n  = scores.shape
+        for i in range(m):
+            for j in range(i+1,n):
                 scores_mask[i][j] = mask_value
         return scores_mask
     elif dim == 3:
